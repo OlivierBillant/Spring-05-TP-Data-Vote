@@ -17,6 +17,7 @@ public class VoteManagerImpl implements VoteManager {
 		try {
 			if (listeElectorale(votant)) {
 				System.out.println(votant.getPrenom()+" "+votant.getNom()+" est inscrit sur la liste électorale");
+				votant.setAVote(true);
 				votantDao.save(votant);
 			}
 		} catch (Exception e) {
@@ -42,7 +43,7 @@ public class VoteManagerImpl implements VoteManager {
 
 	@Override
 	public Boolean listeElectorale(Votant votant) {
-		if (votant.getAge() >= 18 && "Francais".equals(votant.getNationalite())) {
+		if (votant.getAge() >= 18 && "Francais".equals(votant.getNationalite()) && !votant.getAVote()) {
 			return true;
 		} else {
 			return false;

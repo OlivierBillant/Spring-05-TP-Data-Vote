@@ -18,7 +18,7 @@ import fr.eni.Spring05TPCRUDvote.dal.VotantDao;
 public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 	@Autowired
 	private VotantDao votantDao;
-	private CandidatDao candidatDao;
+//	private CandidatDao candidatDao;
 	@Autowired
 	@Qualifier("VoteManager")
 	private VoteManager voteManager;
@@ -29,8 +29,8 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
-		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
+//		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
+//		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
 		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", "michel");
 		Votant paul = new Votant("Paul", "Avote", 18, "Francais", "michel");
 		Votant jacques = new Votant("Jacques", "Avote", 16, "Francais", "michel");
@@ -46,6 +46,8 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		voteManager.vote(antoine);
 		voteManager.vote(hans);
 
+		voteManager.vote(pierre);
+		
 //		votantDao.save(pierre);
 
 //		System.out.println("Test affichage candidats");
