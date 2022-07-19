@@ -60,7 +60,11 @@ public class VoteManagerImpl implements VoteManager {
 	
 	@Override
 	public void proclamationResultatsMultiple() {
-		System.out.println("Le vainqueur est "+votantDao.getCount().get(0));
+		String results [] = votantDao.getCount().get(0).trim().split(",");
+		String vainqueur = results[0];
+		Integer nrbVotes = Integer.parseInt(results[1]);
+//		System.out.println("Le vainqueur est "+votantDao.getCount().get(0));
+		System.out.println("Le vainqueur est "+vainqueur+" avec "+nrbVotes.toString()+" voix");
 	}
 
 }

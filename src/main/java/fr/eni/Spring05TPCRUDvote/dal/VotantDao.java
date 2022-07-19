@@ -15,6 +15,6 @@ public interface VotantDao extends CrudRepository<Votant, Integer>{
 	ArrayList<String> getByCandidat(@Param("candidat") String prenom);
 	
 //	Ici la requete récupère count les occurence du prenom, les groupe par prénom et les classe par ordre descendant.
-	@Query("SELECT v.candidat FROM Votant v GROUP BY v.candidat ORDER BY count(v.candidat) DESC")
+	@Query("SELECT v.candidat, count(v.candidat) FROM Votant v GROUP BY v.candidat ORDER BY count(v.candidat) DESC")
 	ArrayList<String> getCount();
 }
