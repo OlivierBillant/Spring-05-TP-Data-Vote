@@ -22,11 +22,12 @@ public class Votant {
 		private String nationalite;
 //		private Candidat candidat;
 		private String candidat;
+		private Boolean aVote = false;
 		
-		public Votant(String nom, String prenom, Integer age, String nationalite, String candidat) {
+		public Votant(String prenom, String nom, Integer age, String nationalite, String candidat) {
 			super();
-			this.nom = nom;
 			this.prenom = prenom;
+			this.nom = nom;
 			this.age = age;
 			this.nationalite = nationalite;
 			this.candidat = candidat;

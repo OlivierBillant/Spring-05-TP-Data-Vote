@@ -1,10 +1,14 @@
 package fr.eni.Spring05TPCRUDvote;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import fr.eni.Spring05TPCRUDvote.bll.VoteManager;
 import fr.eni.Spring05TPCRUDvote.bo.Candidat;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
 import fr.eni.Spring05TPCRUDvote.dal.CandidatDao;
@@ -15,6 +19,9 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 	@Autowired
 	private VotantDao votantDao;
 	private CandidatDao candidatDao;
+	@Autowired
+	@Qualifier("VoteManager")
+	private VoteManager voteManager;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Spring05TpCrudVoteApplication.class, args);
@@ -25,15 +32,31 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
 		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
 		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", "michel");
+		Votant paul = new Votant("Paul", "Avote", 18, "Francais", "michel");
+		Votant jacques = new Votant("Jacques", "Avote", 16, "Francais", "michel");
+		Votant antoine = new Votant("Antoine", "Avote", 18, "Francais", "jean");
+		Votant hans = new Votant("Hans", "Gruber", 18, "Allemand", "michel");
 
 //		candidatDao.save(jean);
 //		candidatDao.save(michel);
-		votantDao.save(pierre);
+		voteManager.vote(pierre);
+		voteManager.vote(paul);
+		voteManager.vote(jacques);
+		voteManager.vote(jacques);
+		voteManager.vote(antoine);
+		voteManager.vote(hans);
+
+//		votantDao.save(pierre);
 
 //		System.out.println("Test affichage candidats");
 //		candidatDao.findAll().forEach(System.out::println);
-
-		System.out.println("Test affichage votant");
+		System.out.println("");
+		System.out.println("Impression de la liste des votants");
 		votantDao.findAll().forEach(System.out::println);
+//		votantDao.getByCandidat("michel").forEach(System.out::println);
+//		votantDao.getByCandidat("jean").forEach(System.out::println);
+
+		System.out.println("Proclamation des résultats");
+		System.out.println(voteManager.proclamationResultats());
 	}
 }
