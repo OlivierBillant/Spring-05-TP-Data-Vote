@@ -26,7 +26,7 @@ public class VoteManagerImpl implements VoteManager {
 
 	@Override
 	public void afficherLesVotants() {
-		votantDao.findAll();
+		votantDao.findAll().forEach(System.out::println);;
 	}
 
 	@Override
@@ -55,6 +55,11 @@ public class VoteManagerImpl implements VoteManager {
 			return "Le vainqueur est Michel de Droite";
 		} else
 			return "Le vainqueur est Jean de Gauche";
+	}
+	
+	@Override
+	public void proclamationResultatsMultiple() {
+		System.out.println("Le vainqueur est "+votantDao.getCount().get(0));
 	}
 
 }

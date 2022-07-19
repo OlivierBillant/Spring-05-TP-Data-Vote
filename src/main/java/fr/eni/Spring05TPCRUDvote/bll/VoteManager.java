@@ -9,4 +9,5 @@ public interface VoteManager {
 	public void afficherVotantsaDroite();
 	public Boolean listeElectorale(Votant votant);
 	public String proclamationResultats();
+	public void proclamationResultatsMultiple();
 }

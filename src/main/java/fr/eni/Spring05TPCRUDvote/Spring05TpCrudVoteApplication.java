@@ -52,11 +52,14 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 //		candidatDao.findAll().forEach(System.out::println);
 		System.out.println("");
 		System.out.println("Impression de la liste des votants");
-		votantDao.findAll().forEach(System.out::println);
+		voteManager.afficherLesVotants();
 //		votantDao.getByCandidat("michel").forEach(System.out::println);
 //		votantDao.getByCandidat("jean").forEach(System.out::println);
 
 		System.out.println("Proclamation des résultats");
 		System.out.println(voteManager.proclamationResultats());
+		System.out.println("Tableau des résultats");
+		System.out.println(votantDao.getCount());
+		voteManager.proclamationResultatsMultiple();
 	}
 }
