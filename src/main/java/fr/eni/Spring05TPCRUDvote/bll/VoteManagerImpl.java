@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
+import fr.eni.Spring05TPCRUDvote.dal.CandidatDao;
 import fr.eni.Spring05TPCRUDvote.dal.VotantDao;
 
 @Component("VoteManager")
 public class VoteManagerImpl implements VoteManager {
 	@Autowired
 	private VotantDao votantDao;
-
+	@Autowired
+	private CandidatDao candidatDao;
 	@Override
 	public void vote(Votant votant) {
 //		votantDao.save(votant);
@@ -18,7 +20,9 @@ public class VoteManagerImpl implements VoteManager {
 			if (listeElectorale(votant)) {
 				System.out.println(votant.getPrenom()+" "+votant.getNom()+" est inscrit sur la liste électorale");
 				votant.setAVote(true);
+//				votant.getCandidat().getListeVotants().add(votant);
 				votantDao.save(votant);
+				
 			}
 		} catch (VoteException ve) {
 			System.out.println("Erreur : "+ve.getMessage());

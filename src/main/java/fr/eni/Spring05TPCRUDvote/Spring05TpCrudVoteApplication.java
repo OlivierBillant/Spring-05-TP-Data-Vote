@@ -2,12 +2,14 @@ package fr.eni.Spring05TPCRUDvote;
 
 import java.util.ArrayList;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import fr.eni.Spring05TPCRUDvote.bll.VoteManager;
 import fr.eni.Spring05TPCRUDvote.bo.Candidat;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
