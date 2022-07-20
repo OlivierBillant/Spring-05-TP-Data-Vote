@@ -20,8 +20,8 @@ public class VoteManagerImpl implements VoteManager {
 				votant.setAVote(true);
 				votantDao.save(votant);
 			}
-		} catch (Exception e) {
-			System.out.println("Pas inscrit sur la liste électorale.");
+		} catch (VoteException ve) {
+			System.out.println("Erreur : "+ve.getMessage());
 		}
 	}
 
@@ -42,11 +42,11 @@ public class VoteManagerImpl implements VoteManager {
 	}
 
 	@Override
-	public Boolean listeElectorale(Votant votant) {
+	public Boolean listeElectorale(Votant votant) throws VoteException {
 		if (votant.getAge() >= 18 && "Francais".equals(votant.getNationalite()) && !votant.getAVote()) {
 			return true;
 		} else {
-			return false;
+			throw new VoteException("Ne peut pas voter");
 		}
 	}
 

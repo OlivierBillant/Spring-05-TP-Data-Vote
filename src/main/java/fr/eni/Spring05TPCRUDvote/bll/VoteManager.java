@@ -7,7 +7,7 @@ public interface VoteManager {
 	public void afficherLesVotants();
 	public void afficherVotantsaGauche();
 	public void afficherVotantsaDroite();
-	public Boolean listeElectorale(Votant votant);
+	public Boolean listeElectorale(Votant votant) throws VoteException;
 	public String proclamationResultats();
 	public void proclamationResultatsMultiple();
 }
