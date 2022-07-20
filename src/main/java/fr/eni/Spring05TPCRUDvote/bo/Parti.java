@@ -1,11 +1,9 @@
 package fr.eni.Spring05TPCRUDvote.bo;
 
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
