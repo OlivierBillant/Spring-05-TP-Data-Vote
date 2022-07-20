@@ -35,6 +35,7 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", michel);
 		Votant paul = new Votant("Paul", "Avote", 18, "Francais", jean);
 		Votant jacques = new Votant("Jacques", "Avote", 16, "Francais", michel);
+		Votant andre = new Votant("André", "Bourrelesurnes", 19, "Francais", jean);
 		Votant antoine = new Votant("Antoine", "Avote", 18, "Francais", jean);
 		Votant hans = new Votant("Hans", "Gruber", 18, "Allemand", michel);
 
@@ -43,7 +44,7 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		voteManager.vote(pierre);
 		voteManager.vote(paul);
 		voteManager.vote(jacques);
-		voteManager.vote(jacques);
+		voteManager.vote(andre);
 		voteManager.vote(antoine);
 		voteManager.vote(hans);
 
@@ -63,7 +64,8 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		System.out.println("Proclamation des résultats");
 //		System.out.println(voteManager.proclamationResultats());
 //		System.out.println("Tableau des résultats");
-		System.out.println(votantDao.getCount());
+//		System.out.println(votantDao.getCount());
+//		System.out.println(votantDao.getTotalVote());
 		voteManager.proclamationResultatsMultiple();
 	}
 }

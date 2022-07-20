@@ -71,7 +71,11 @@ public class VoteManagerImpl implements VoteManager {
 //		String results [] = votantDao.getCount().get(0).trim().split(",");
 //		String vainqueur = results[0];
 //		Integer nrbVotes = Integer.parseInt(results[1]);
-		System.out.println("Le vainqueur est "+votantDao.getCount().get(0).getPrenom()+" "+ votantDao.getCount().get(0).getNom()+" Vive la "+votantDao.getCount().get(0).getParti());
+		System.out.println("Le vainqueur est "
+				+votantDao.getCount().get(0).getPrenom()
+				+" "+ votantDao.getCount().get(0).getNom()
+				+" avec "+ votantDao.getTotalVote().get(0)+" voix !"
+				+" Vive la "+votantDao.getCount().get(0).getParti());
 //		System.out.println("Le vainqueur est "+vainqueur+" avec "+nrbVotes.toString()+" voix");
 	}
 

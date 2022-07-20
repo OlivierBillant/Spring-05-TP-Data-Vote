@@ -19,4 +19,9 @@ public interface VotantDao extends CrudRepository<Votant, Integer>{
 	@Query("SELECT v.candidat FROM Votant v GROUP BY v.candidat ORDER BY count(v.candidat) DESC")
 	ArrayList<Candidat> getCount();
 
+	@Query("SELECT count(v.candidat) FROM Votant v GROUP BY v.candidat ORDER BY count(v.candidat) DESC")
+	ArrayList<Integer> getTotalVote();
+
+	
+	
 }
