@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -29,8 +30,8 @@ public class Candidat {
 	private String prenom;
 	private String parti;
 	
-	@OneToMany(mappedBy = "candidat")
-	private Set<Votant> listeVotants = new HashSet<Votant>();
+	@OneToMany(mappedBy = "candidat", fetch = FetchType.LAZY)
+	private Set<Votant> listeVotants = new HashSet<>();
 
 	public Candidat(String prenom, String nom, String parti) {
 		super();
@@ -42,4 +43,11 @@ public class Candidat {
 	public void addVotant(Votant votant) {
 		listeVotants.add(votant);
 	}
+
+	@Override
+	public String toString() {
+		return "Candidat [idCandidat=" + idCandidat + ", nom=" + nom + ", prenom=" + prenom + ", parti=" + parti + "]";
+	}
+	
+	
 }

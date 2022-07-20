@@ -1,5 +1,7 @@
 package fr.eni.Spring05TPCRUDvote;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +25,7 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 	}
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
 		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
