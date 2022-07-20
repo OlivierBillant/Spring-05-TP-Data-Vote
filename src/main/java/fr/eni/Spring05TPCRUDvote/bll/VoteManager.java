@@ -1,5 +1,6 @@
 package fr.eni.Spring05TPCRUDvote.bll;
 
+import fr.eni.Spring05TPCRUDvote.bo.Candidat;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
 
 public interface VoteManager {
@@ -10,4 +11,6 @@ public interface VoteManager {
 	public Boolean listeElectorale(Votant votant) throws VoteException;
 	public String proclamationResultats();
 	public void proclamationResultatsMultiple();
+	void candidature(Candidat candidat);
+	void afficherLesCandidatures();
 }

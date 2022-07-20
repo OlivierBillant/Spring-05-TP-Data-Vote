@@ -8,11 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.Data;
+//import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-
-@Data
+//@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 //@AllArgsConstructor
 @Entity
@@ -24,8 +29,8 @@ public class Candidat {
 	private String prenom;
 	private String parti;
 	
-//	@OneToMany(mappedBy = "candidat")
-//	private Set<Votant> listeVotants = new HashSet<>();
+	@OneToMany(mappedBy = "candidat")
+	private Set<Votant> listeVotants = new HashSet<Votant>();
 
 	public Candidat(String prenom, String nom, String parti) {
 		super();
@@ -34,8 +39,7 @@ public class Candidat {
 		this.parti = parti;
 	}
 	
-//	public void addVotant(Votant votant) {
-//		listeVotants.add(votant);
-//		votant.setCandidat(this);
-//	}
+	public void addVotant(Votant votant) {
+		listeVotants.add(votant);
+	}
 }

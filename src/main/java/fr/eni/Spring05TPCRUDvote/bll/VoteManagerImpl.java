@@ -3,6 +3,7 @@ package fr.eni.Spring05TPCRUDvote.bll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.eni.Spring05TPCRUDvote.bo.Candidat;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
 import fr.eni.Spring05TPCRUDvote.dal.CandidatDao;
 import fr.eni.Spring05TPCRUDvote.dal.VotantDao;
@@ -20,19 +21,25 @@ public class VoteManagerImpl implements VoteManager {
 			if (listeElectorale(votant)) {
 				System.out.println(votant.getPrenom()+" "+votant.getNom()+" est inscrit sur la liste électorale");
 				votant.setAVote(true);
-//				votant.getCandidat().getListeVotants().add(votant);
 				votantDao.save(votant);
+				votant.getCandidat().addVotant(votant);
 				
 			}
 		} catch (VoteException ve) {
 			System.out.println("Erreur : "+ve.getMessage());
 		}
 	}
+	
+	@Override
+	public void candidature(Candidat candidat) {
+		candidatDao.save(candidat);
+	}
 
 	@Override
 	public void afficherLesVotants() {
-		votantDao.findAll().forEach(System.out::println);;
+		votantDao.findAll().forEach(System.out::println);
 	}
+	
 
 	@Override
 	public void afficherVotantsaGauche() {
@@ -44,6 +51,12 @@ public class VoteManagerImpl implements VoteManager {
 		votantDao.getByCandidat("michel");
 
 	}
+	
+	@Override
+	public void afficherLesCandidatures() {
+		candidatDao.findAll().forEach(System.out::println);
+	}
+	
 
 	@Override
 	public Boolean listeElectorale(Votant votant) throws VoteException {
@@ -61,26 +74,15 @@ public class VoteManagerImpl implements VoteManager {
 		} else
 			return "Le vainqueur est Jean de Gauche";
 	}
-	
-//	@Override
-//	public void proclamationResultatsMultiple() {
-//		String results [] = votantDao.getCount().get(0).trim().split(",");
-//		String vainqueur = results[0];
-//		Integer nrbVotes = Integer.parseInt(results[1]);
-//		System.out.println("Le vainqueur est "+vainqueur+" avec "+nrbVotes.toString()+" voix");
-//	}
+
 	
 	@Override
 	public void proclamationResultatsMultiple() {
-//		String results [] = votantDao.getCount().get(0).trim().split(",");
-//		String vainqueur = results[0];
-//		Integer nrbVotes = Integer.parseInt(results[1]);
 		System.out.println("Le vainqueur est "
 				+votantDao.getCount().get(0).getPrenom()
 				+" "+ votantDao.getCount().get(0).getNom()
 				+" avec "+ votantDao.getTotalVote().get(0)+" voix !"
 				+" Vive la "+votantDao.getCount().get(0).getParti());
-//		System.out.println("Le vainqueur est "+vainqueur+" avec "+nrbVotes.toString()+" voix");
 	}
 
 }
