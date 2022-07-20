@@ -18,7 +18,8 @@ import fr.eni.Spring05TPCRUDvote.dal.VotantDao;
 public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 	@Autowired
 	private VotantDao votantDao;
-//	private CandidatDao candidatDao;
+	@Autowired
+	private CandidatDao candidatDao;
 	@Autowired
 	@Qualifier("VoteManager")
 	private VoteManager voteManager;
@@ -29,16 +30,16 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
-//		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
-		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", "michel");
-		Votant paul = new Votant("Paul", "Avote", 18, "Francais", "michel");
-		Votant jacques = new Votant("Jacques", "Avote", 16, "Francais", "michel");
-		Votant antoine = new Votant("Antoine", "Avote", 18, "Francais", "jean");
-		Votant hans = new Votant("Hans", "Gruber", 18, "Allemand", "michel");
+		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
+		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
+		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", michel);
+		Votant paul = new Votant("Paul", "Avote", 18, "Francais", jean);
+		Votant jacques = new Votant("Jacques", "Avote", 16, "Francais", michel);
+		Votant antoine = new Votant("Antoine", "Avote", 18, "Francais", jean);
+		Votant hans = new Votant("Hans", "Gruber", 18, "Allemand", michel);
 
-//		candidatDao.save(jean);
-//		candidatDao.save(michel);
+		candidatDao.save(jean);
+		candidatDao.save(michel);
 		voteManager.vote(pierre);
 		voteManager.vote(paul);
 		voteManager.vote(jacques);
@@ -48,19 +49,20 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 
 		voteManager.vote(pierre);
 		
-//		votantDao.save(pierre);
-
-//		System.out.println("Test affichage candidats");
-//		candidatDao.findAll().forEach(System.out::println);
+		System.out.println("Test affichage candidats");
+		candidatDao.findAll().forEach(System.out::println);
 		System.out.println("");
+		
 		System.out.println("Impression de la liste des votants");
 		voteManager.afficherLesVotants();
+		System.out.println("");
+		
 //		votantDao.getByCandidat("michel").forEach(System.out::println);
 //		votantDao.getByCandidat("jean").forEach(System.out::println);
 
 		System.out.println("Proclamation des résultats");
-		System.out.println(voteManager.proclamationResultats());
-		System.out.println("Tableau des résultats");
+//		System.out.println(voteManager.proclamationResultats());
+//		System.out.println("Tableau des résultats");
 		System.out.println(votantDao.getCount());
 		voteManager.proclamationResultatsMultiple();
 	}

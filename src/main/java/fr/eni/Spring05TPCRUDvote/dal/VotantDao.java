@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import fr.eni.Spring05TPCRUDvote.bo.Candidat;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
 
 public interface VotantDao extends CrudRepository<Votant, Integer>{
@@ -15,6 +16,8 @@ public interface VotantDao extends CrudRepository<Votant, Integer>{
 	ArrayList<String> getByCandidat(@Param("candidat") String prenom);
 	
 //	Ici la requete récupère count les occurence du prenom, les groupe par prénom et les classe par ordre descendant.
-	@Query("SELECT v.candidat, count(v.candidat) FROM Votant v GROUP BY v.candidat ORDER BY count(v.candidat) DESC")
-	ArrayList<String> getCount();
+	@Query("SELECT v.candidat FROM Votant v GROUP BY v.candidat ORDER BY count(v.candidat) DESC")
+	ArrayList<Candidat> getCount();
+
+
 }

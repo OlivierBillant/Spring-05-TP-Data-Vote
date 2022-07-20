@@ -20,10 +20,10 @@ public class Candidat {
 	private String prenom;
 	private String parti;
 
-	public Candidat(String nom, String prenom, String parti) {
+	public Candidat(String prenom, String nom, String parti) {
 		super();
-		this.nom = nom;
 		this.prenom = prenom;
+		this.nom = nom;
 		this.parti = parti;
 	}
 }

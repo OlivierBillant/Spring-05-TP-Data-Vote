@@ -58,13 +58,21 @@ public class VoteManagerImpl implements VoteManager {
 			return "Le vainqueur est Jean de Gauche";
 	}
 	
+//	@Override
+//	public void proclamationResultatsMultiple() {
+//		String results [] = votantDao.getCount().get(0).trim().split(",");
+//		String vainqueur = results[0];
+//		Integer nrbVotes = Integer.parseInt(results[1]);
+//		System.out.println("Le vainqueur est "+vainqueur+" avec "+nrbVotes.toString()+" voix");
+//	}
+	
 	@Override
 	public void proclamationResultatsMultiple() {
-		String results [] = votantDao.getCount().get(0).trim().split(",");
-		String vainqueur = results[0];
-		Integer nrbVotes = Integer.parseInt(results[1]);
-//		System.out.println("Le vainqueur est "+votantDao.getCount().get(0));
-		System.out.println("Le vainqueur est "+vainqueur+" avec "+nrbVotes.toString()+" voix");
+//		String results [] = votantDao.getCount().get(0).trim().split(",");
+//		String vainqueur = results[0];
+//		Integer nrbVotes = Integer.parseInt(results[1]);
+		System.out.println("Le vainqueur est "+votantDao.getCount().get(0).getPrenom()+" "+ votantDao.getCount().get(0).getNom()+" Vive la "+votantDao.getCount().get(0).getParti());
+//		System.out.println("Le vainqueur est "+vainqueur+" avec "+nrbVotes.toString()+" voix");
 	}
 
 }

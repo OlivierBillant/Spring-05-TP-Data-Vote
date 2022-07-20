@@ -3,6 +3,7 @@ package fr.eni.Spring05TPCRUDvote.bo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 //import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,11 +21,12 @@ public class Votant {
 		private String prenom;
 		private Integer age;
 		private String nationalite;
-//		private Candidat candidat;
-		private String candidat;
+		@ManyToOne
+		private Candidat candidat;
+//		private String candidat;
 		private Boolean aVote = false;
 		
-		public Votant(String prenom, String nom, Integer age, String nationalite, String candidat) {
+		public Votant(String prenom, String nom, Integer age, String nationalite, Candidat candidat) {
 			super();
 			this.prenom = prenom;
 			this.nom = nom;
