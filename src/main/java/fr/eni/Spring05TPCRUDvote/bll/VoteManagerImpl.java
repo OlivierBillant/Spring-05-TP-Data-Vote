@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.eni.Spring05TPCRUDvote.bo.Candidat;
+import fr.eni.Spring05TPCRUDvote.bo.Parti;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
 import fr.eni.Spring05TPCRUDvote.dal.CandidatDao;
+import fr.eni.Spring05TPCRUDvote.dal.PartiDao;
 import fr.eni.Spring05TPCRUDvote.dal.VotantDao;
 
 @Component("VoteManager")
@@ -17,6 +19,8 @@ public class VoteManagerImpl implements VoteManager {
 	private VotantDao votantDao;
 	@Autowired
 	private CandidatDao candidatDao;
+	@Autowired
+	private PartiDao partiDao;
 
 	@Override
 	public void vote(Votant votant) {
@@ -35,6 +39,16 @@ public class VoteManagerImpl implements VoteManager {
 	}
 
 	@Override
+	public void creationParti(Parti parti) {
+		partiDao.save(parti);
+	}
+
+	@Override
+	public void afficherLesPartis() {
+		partiDao.findAll().forEach(System.out::println);
+	}
+	
+	@Override
 	public void candidature(Candidat candidat) {
 		candidatDao.save(candidat);
 	}
@@ -43,6 +57,7 @@ public class VoteManagerImpl implements VoteManager {
 	public void afficherLesVotants() {
 		votantDao.findAll().forEach(System.out::println);
 	}
+	
 
 	@Override
 	public void afficherVotantsaGauche() {
@@ -94,7 +109,7 @@ public class VoteManagerImpl implements VoteManager {
 	public void proclamationResultatsMultiple() {
 		System.out.println("Le vainqueur est " + votantDao.getCount().get(0).getPrenom() + " "
 				+ votantDao.getCount().get(0).getNom() + " avec " + votantDao.getTotalVote().get(0) + " voix !"
-				+ " Vive la " + votantDao.getCount().get(0).getParti());
+				+ " Vive la " + votantDao.getCount().get(0).getParti().getAffiliation());
 	}
 
 }

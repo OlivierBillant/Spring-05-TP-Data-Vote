@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import fr.eni.Spring05TPCRUDvote.bll.VoteManager;
 import fr.eni.Spring05TPCRUDvote.bo.Candidat;
+import fr.eni.Spring05TPCRUDvote.bo.Parti;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
 
 
@@ -26,9 +27,11 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
+		Parti laGoche = new Parti("lesSoumises", "Goche");
+		Parti laDroate = new Parti("laMatraque", "Droate");
 //		Création des candidats
-		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
-		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
+		Candidat jean = new Candidat("Jean", "Delagauche", laGoche);
+		Candidat michel = new Candidat("Michel", "Plusadroite", laDroate);
 //		Création des votants
 		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", michel);
 		Votant paul = new Votant("Paul", "Avote", 18, "Francais", jean);
@@ -36,6 +39,10 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		Votant andre = new Votant("André", "Bourrelesurnes", 19, "Francais", jean);
 		Votant antoine = new Votant("Antoine", "Avote", 18, "Francais", jean);
 		Votant hans = new Votant("Hans", "Gruber", 18, "Allemand", michel);
+
+//		Enreistrement des partis en db
+		voteManager.creationParti(laGoche);
+		voteManager.creationParti(laDroate);
 
 //		Enreistrement des candidatures en db
 		voteManager.candidature(jean);
@@ -52,6 +59,11 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 //		Essai de vote en doublon
 		voteManager.vote(pierre);
 
+//		Affichage de tous les partis
+		System.out.println("Test affichage partis");
+		voteManager.afficherLesPartis();
+		System.out.println("");
+		
 //		Affichage de toutes les candidatures
 		System.out.println("Test affichage candidats");
 		voteManager.afficherLesCandidatures();

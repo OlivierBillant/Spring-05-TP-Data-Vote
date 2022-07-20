@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 //import lombok.Data;
@@ -28,12 +29,13 @@ public class Candidat {
 	private Integer idCandidat;
 	private String nom;
 	private String prenom;
-	private String parti;
+	@ManyToOne
+	private Parti parti;
 	
 	@OneToMany(mappedBy = "candidat", fetch = FetchType.LAZY)
 	private Set<Votant> listeVotants = new HashSet<>();
 
-	public Candidat(String prenom, String nom, String parti) {
+	public Candidat(String prenom, String nom, Parti parti) {
 		super();
 		this.prenom = prenom;
 		this.nom = nom;
@@ -46,8 +48,10 @@ public class Candidat {
 
 	@Override
 	public String toString() {
-		return "Candidat [idCandidat=" + idCandidat + ", nom=" + nom + ", prenom=" + prenom + ", parti=" + parti + "]";
+		return "Candidat [nom=" + nom + ", prenom=" + prenom + ", parti=" + parti.getNom() + "]";
 	}
+
+	
 	
 	
 }
