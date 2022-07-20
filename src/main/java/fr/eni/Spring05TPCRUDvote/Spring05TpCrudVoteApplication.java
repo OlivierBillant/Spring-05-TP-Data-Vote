@@ -27,11 +27,12 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		Parti laGoche = new Parti("lesSoumises", "Goche");
-		Parti laDroate = new Parti("laMatraque", "Droate");
+		Parti lesSoumises = new Parti("lesSoumises", "Goche");
+		Parti laMatraque = new Parti("laMatraque", "Droate");
 //		Création des candidats
-		Candidat jean = new Candidat("Jean", "Delagauche", laGoche);
-		Candidat michel = new Candidat("Michel", "Plusadroite", laDroate);
+		Candidat jean = new Candidat("Jean", "Delagauche", lesSoumises);
+		Candidat jeanne = new Candidat("Jeanne", "Dissidente", lesSoumises);
+		Candidat michel = new Candidat("Michel", "Plusadroite", laMatraque);
 //		Création des votants
 		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", michel);
 		Votant paul = new Votant("Paul", "Avote", 18, "Francais", jean);
@@ -41,11 +42,12 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		Votant hans = new Votant("Hans", "Gruber", 18, "Allemand", michel);
 
 //		Enreistrement des partis en db
-		voteManager.creationParti(laGoche);
-		voteManager.creationParti(laDroate);
+		voteManager.creationParti(lesSoumises);
+		voteManager.creationParti(laMatraque);
 
 //		Enreistrement des candidatures en db
 		voteManager.candidature(jean);
+		voteManager.candidature(jeanne);
 		voteManager.candidature(michel);
 		
 //		Enreistrement des votes en db
