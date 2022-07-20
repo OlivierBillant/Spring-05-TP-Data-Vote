@@ -15,7 +15,6 @@ import fr.eni.Spring05TPCRUDvote.bo.Votant;
 
 @SpringBootApplication
 public class Spring05TpCrudVoteApplication implements CommandLineRunner {
-
 	@Autowired
 	@Qualifier("VoteManager")
 	private VoteManager voteManager;
@@ -27,8 +26,10 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
+//		Création des candidats
 		Candidat jean = new Candidat("Jean", "Delagauche", "Gauche");
 		Candidat michel = new Candidat("Michel", "Plusadroite", "Droite");
+//		Création des votants
 		Votant pierre = new Votant("Pierre", "Avote", 18, "Francais", michel);
 		Votant paul = new Votant("Paul", "Avote", 18, "Francais", jean);
 		Votant jacques = new Votant("Jacques", "Avote", 16, "Francais", michel);
@@ -36,28 +37,35 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		Votant antoine = new Votant("Antoine", "Avote", 18, "Francais", jean);
 		Votant hans = new Votant("Hans", "Gruber", 18, "Allemand", michel);
 
+//		Enreistrement des candidatures en db
 		voteManager.candidature(jean);
 		voteManager.candidature(michel);
+		
+//		Enreistrement des votes en db
 		voteManager.vote(pierre);
 		voteManager.vote(paul);
 		voteManager.vote(jacques);
 		voteManager.vote(andre);
 		voteManager.vote(antoine);
 		voteManager.vote(hans);
-
+		
+//		Essai de vote en doublon
 		voteManager.vote(pierre);
 
+//		Affichage de toutes les candidatures
 		System.out.println("Test affichage candidats");
 		voteManager.afficherLesCandidatures();
 		System.out.println("");
 
+//		Affichage de touts les votants
 		System.out.println("Impression de la liste des votants");
 		voteManager.afficherLesVotants();
 		System.out.println("");
+		
+//		Affichage des votants par candidat
+		voteManager.afficherListesVotants();
 
-//		votantDao.getByCandidat("michel").forEach(System.out::println);
-//		votantDao.getByCandidat("jean").forEach(System.out::println);
-
+//		Affichage des résultats
 		System.out.println("Proclamation des résultats");
 		voteManager.proclamationResultatsMultiple();
 	}

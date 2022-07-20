@@ -13,12 +13,12 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+//import lombok.ToString;
 
 //@Data
 @Getter
 @Setter
-@ToString
+//@ToString
 @NoArgsConstructor
 //@AllArgsConstructor
 @Entity

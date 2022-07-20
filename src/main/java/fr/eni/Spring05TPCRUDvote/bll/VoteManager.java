@@ -13,4 +13,5 @@ public interface VoteManager {
 	public void proclamationResultatsMultiple();
 	void candidature(Candidat candidat);
 	void afficherLesCandidatures();
+	void afficherListesVotants();
 }

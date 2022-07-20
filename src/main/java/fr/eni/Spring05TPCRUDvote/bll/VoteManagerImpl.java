@@ -1,5 +1,8 @@
 package fr.eni.Spring05TPCRUDvote.bll;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,22 +17,23 @@ public class VoteManagerImpl implements VoteManager {
 	private VotantDao votantDao;
 	@Autowired
 	private CandidatDao candidatDao;
+
 	@Override
 	public void vote(Votant votant) {
 //		votantDao.save(votant);
 		try {
 			if (listeElectorale(votant)) {
-				System.out.println(votant.getPrenom()+" "+votant.getNom()+" est inscrit sur la liste électorale");
+				System.out.println(votant.getPrenom() + " " + votant.getNom() + " est inscrit sur la liste électorale");
 				votant.setAVote(true);
 				votantDao.save(votant);
 				votant.getCandidat().addVotant(votant);
-				
+
 			}
 		} catch (VoteException ve) {
-			System.out.println("Erreur : "+ve.getMessage());
+			System.out.println("Erreur : " + ve.getMessage());
 		}
 	}
-	
+
 	@Override
 	public void candidature(Candidat candidat) {
 		candidatDao.save(candidat);
@@ -39,7 +43,6 @@ public class VoteManagerImpl implements VoteManager {
 	public void afficherLesVotants() {
 		votantDao.findAll().forEach(System.out::println);
 	}
-	
 
 	@Override
 	public void afficherVotantsaGauche() {
@@ -51,12 +54,11 @@ public class VoteManagerImpl implements VoteManager {
 		votantDao.getByCandidat("michel");
 
 	}
-	
+
 	@Override
 	public void afficherLesCandidatures() {
 		candidatDao.findAll().forEach(System.out::println);
 	}
-	
 
 	@Override
 	public Boolean listeElectorale(Votant votant) throws VoteException {
@@ -68,6 +70,19 @@ public class VoteManagerImpl implements VoteManager {
 	}
 
 	@Override
+	public void afficherListesVotants() {
+		ArrayList<Candidat> listeCandidats = (ArrayList<Candidat>) candidatDao.findAll();
+		for (Candidat candidat : listeCandidats) {
+			System.out.println("Liste des votants pour "+candidat.getPrenom()+" "+candidat.getNom());
+			Set<Votant> listeVotants = candidat.getListeVotants();
+			for (Votant votant : listeVotants) {
+				System.out.println(votant.getPrenom()+" "+votant.getNom());
+			}
+		System.out.println("");
+		}
+	}
+
+	@Override
 	public String proclamationResultats() {
 		if (votantDao.getByCandidat("michel").size() > votantDao.getByCandidat("jean").size()) {
 			return "Le vainqueur est Michel de Droite";
@@ -75,14 +90,11 @@ public class VoteManagerImpl implements VoteManager {
 			return "Le vainqueur est Jean de Gauche";
 	}
 
-	
 	@Override
 	public void proclamationResultatsMultiple() {
-		System.out.println("Le vainqueur est "
-				+votantDao.getCount().get(0).getPrenom()
-				+" "+ votantDao.getCount().get(0).getNom()
-				+" avec "+ votantDao.getTotalVote().get(0)+" voix !"
-				+" Vive la "+votantDao.getCount().get(0).getParti());
+		System.out.println("Le vainqueur est " + votantDao.getCount().get(0).getPrenom() + " "
+				+ votantDao.getCount().get(0).getNom() + " avec " + votantDao.getTotalVote().get(0) + " voix !"
+				+ " Vive la " + votantDao.getCount().get(0).getParti());
 	}
 
 }
