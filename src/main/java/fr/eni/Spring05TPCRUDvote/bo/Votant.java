@@ -26,6 +26,8 @@ public class Votant {
 		private Candidat candidat;
 //		private String candidat;
 		private Boolean aVote = false;
+		@ManyToOne
+		private BureauDeVote bureau;
 		
 		public Votant(String prenom, String nom, Integer age, String nationalite, Candidat candidat) {
 			super();
@@ -34,6 +36,17 @@ public class Votant {
 			this.age = age;
 			this.nationalite = nationalite;
 			this.candidat = candidat;
+		}
+
+		public Votant(String nom, String prenom, Integer age, String nationalite, Candidat candidat,
+				BureauDeVote bureau) {
+			super();
+			this.nom = nom;
+			this.prenom = prenom;
+			this.age = age;
+			this.nationalite = nationalite;
+			this.candidat = candidat;
+			this.bureau = bureau;
 		}	
 	}
 

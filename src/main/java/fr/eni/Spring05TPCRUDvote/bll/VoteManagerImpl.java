@@ -6,9 +6,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.eni.Spring05TPCRUDvote.bo.BureauDeVote;
 import fr.eni.Spring05TPCRUDvote.bo.Candidat;
 import fr.eni.Spring05TPCRUDvote.bo.Parti;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
+import fr.eni.Spring05TPCRUDvote.dal.BureauDeVoteDao;
 import fr.eni.Spring05TPCRUDvote.dal.CandidatDao;
 import fr.eni.Spring05TPCRUDvote.dal.PartiDao;
 import fr.eni.Spring05TPCRUDvote.dal.VotantDao;
@@ -21,6 +23,8 @@ public class VoteManagerImpl implements VoteManager {
 	private CandidatDao candidatDao;
 	@Autowired
 	private PartiDao partiDao;
+	@Autowired
+	private BureauDeVoteDao bureauDao;
 
 	@Override
 	public void vote(Votant votant) {
@@ -46,6 +50,16 @@ public class VoteManagerImpl implements VoteManager {
 	@Override
 	public void afficherLesPartis() {
 		partiDao.findAll().forEach(System.out::println);
+	}
+
+	@Override
+	public void creationBureau(BureauDeVote bureau) {
+		bureauDao.save(bureau);
+	}
+	
+	@Override
+	public void afficherLesBureaux() {
+		bureauDao.findAll().forEach(System.out::println);
 	}
 	
 	@Override

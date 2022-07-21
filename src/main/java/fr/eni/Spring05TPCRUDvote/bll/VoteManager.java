@@ -1,5 +1,6 @@
 package fr.eni.Spring05TPCRUDvote.bll;
 
+import fr.eni.Spring05TPCRUDvote.bo.BureauDeVote;
 import fr.eni.Spring05TPCRUDvote.bo.Candidat;
 import fr.eni.Spring05TPCRUDvote.bo.Parti;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
@@ -17,4 +18,6 @@ public interface VoteManager {
 	void afficherListesVotants();
 	void creationParti(Parti parti);
 	void afficherLesPartis();
+	void creationBureau(BureauDeVote bureau);
+	void afficherLesBureaux();
 }
