@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 //import lombok.ToString;
 
 //@Data
@@ -33,6 +34,7 @@ public class Candidat {
 	private Parti parti;
 	
 	@OneToMany(mappedBy = "candidat", fetch = FetchType.LAZY)
+	@ToString.Exclude
 	private Set<Votant> listeVotants = new HashSet<>();
 
 	public Candidat(String prenom, String nom, Parti parti) {
@@ -46,10 +48,10 @@ public class Candidat {
 		listeVotants.add(votant);
 	}
 
-	@Override
-	public String toString() {
-		return "Candidat [nom=" + nom + ", prenom=" + prenom + ", parti=" + parti.getNom() + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Candidat [nom=" + nom + ", prenom=" + prenom + ", parti=" + parti.getNom() + "]";
+//	}
 
 	
 	
