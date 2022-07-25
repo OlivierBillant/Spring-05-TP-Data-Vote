@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,8 +29,9 @@ import lombok.ToString;
 //@ToString
 @NoArgsConstructor
 //@AllArgsConstructor
-@Entity
-@Table(name = "candidate")
+@Entity(name = "candidate")
+
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Candidat {
 	@Id
 	@GeneratedValue

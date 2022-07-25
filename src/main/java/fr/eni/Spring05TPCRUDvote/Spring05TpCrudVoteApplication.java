@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import fr.eni.Spring05TPCRUDvote.bll.VoteManager;
 import fr.eni.Spring05TPCRUDvote.bo.BureauDeVote;
 import fr.eni.Spring05TPCRUDvote.bo.Candidat;
+import fr.eni.Spring05TPCRUDvote.bo.CandidatAncien;
 import fr.eni.Spring05TPCRUDvote.bo.Parti;
 import fr.eni.Spring05TPCRUDvote.bo.Passion;
 import fr.eni.Spring05TPCRUDvote.bo.Votant;
@@ -46,7 +47,7 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 //		Création des candidats
 		Candidat jean = new Candidat("Jean", "Delagauche", lesSoumises);
 		Candidat jeanne = new Candidat("Jeanne", "Dissidente", lesSoumises);
-		Candidat michel = new Candidat("Michel", "Plusadroite", laMatraque);
+		CandidatAncien michel = new CandidatAncien("Michel", "Plusadroite", laMatraque, 35.5);
 		michel.getListePassion().add(chasse);
 		michel.getListePassion().add(peche);
 
@@ -110,12 +111,15 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		System.out.println("Proclamation des résultats");
 		voteManager.proclamationResultatsMultiple();
 
+//		Tests JPQL
 //		Affichage Passion de candidat du votant
 		System.out.println("Passions du candidat du votant");
 		System.out.println("Test");
 		pierre.getCandidat().getListePassion().forEach(System.out::println);
 		System.out.println("Résultat requete");
 		candidatDao.getPassionCandidatOfVotant(pierre).forEach(System.out::println);
-//		System.out.println(candidatDao.getPassionCandidatOfVotant(pierre));
+//		Affichage popularite candidat de Droite
+		System.out.println("Résultat requete");
+		System.out.println(candidatDao.getPopCandidatDroate("Droate"));
 	}
 }

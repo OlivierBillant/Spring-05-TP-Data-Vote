@@ -15,4 +15,6 @@ public interface CandidatDao extends CrudRepository<Candidat, Integer> {
 	@Query("SELECT p.nom FROM Votant v JOIN v.candidat c JOIN c.listePassion p WHERE v= :votant")
 	ArrayList<String> getPassionCandidatOfVotant(@Param("votant") Votant votant);
 	
+	@Query("SELECT c.popularite FROM candidate c WHERE c.parti.affiliation= :affiliation ")
+	Double getPopCandidatDroate(@Param("affiliation") String string);
 }
