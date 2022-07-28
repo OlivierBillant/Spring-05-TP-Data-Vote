@@ -41,14 +41,14 @@ public class Spring05TpCrudVoteApplication implements CommandLineRunner {
 		BureauDeVote bureau103 = new BureauDeVote("103", "Sanquer");
 //		Création des passions
 		Passion crochet = new Passion("Crochet", "Long et pénible");
-		Passion chasse = new Passion("Chasse", "Dangereux et stupide");
+//		Passion chasse = new Passion("Chasse", "Dangereux et stupide");
 		Passion peche = new Passion("Peche", "Penible et stupide");
 
 //		Création des candidats
 		Candidat jean = new Candidat("Jean", "Delagauche", lesSoumises);
 		Candidat jeanne = new Candidat("Jeanne", "Dissidente", lesSoumises);
 		CandidatAncien michel = new CandidatAncien("Michel", "Plusadroite", laMatraque, 35.5);
-		michel.getListePassion().add(chasse);
+//		michel.getListePassion().add(chasse);
 		michel.getListePassion().add(peche);
 
 //		Création des votants

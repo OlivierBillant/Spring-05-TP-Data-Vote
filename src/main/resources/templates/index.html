@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Liste des passions</title>
+</head>
+<body>
+<H1>Liste des passions</H1>
+<ul>
+	<li th:each="passion : ${list}">
+		<span th:text="${passion.nom}" />
+		<span th:text="${passion.description}" />
+		<a th:href="@{/passion/del/{id}(id=${passion.idPassion})}">X</a>
+		<a th:href="@{/passion/mod/{id}(id=${passion.idPassion})}">M</a>
+	</li>
+</ul>
+<a href="/passion/add">Ajout</a>
+</body>
+</html>
